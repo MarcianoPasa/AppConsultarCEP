@@ -1,31 +1,30 @@
 ﻿using AppConsultarCEP.Modelo;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace AppConsultarCEP.Servico
 {
     public class ServicoCEP
     {
-        private static string EnderecoURL = "http://viacep.com.br/ws/{0}/json/";
+        private static string enderecoURL = "https://viacep.com.br/ws/{0}/json/";
 
-        public static Endereco BuscarEnderecoPeloCEP(string cep)
+        public async static Task<Endereco> BuscarEnderecoPeloCEP(string cep)
         {
-            string novaURL = string.Format(EnderecoURL, cep);
+            string novaURL = string.Format(enderecoURL, cep);
 
-            WebClient webClient = new WebClient();
-            string retorno = webClient.DownloadString(novaURL);
+            HttpClient requisicao = new HttpClient();
+            HttpResponseMessage resposta = await requisicao.GetAsync(novaURL);
 
-            Endereco endereco = JsonConvert.DeserializeObject<Endereco>(retorno);
-
-            if (endereco.cep == null)
+            if (resposta.StatusCode == HttpStatusCode.OK)
             {
-                return null;
+                var conteudo = await resposta.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<Endereco>(conteudo);
             }
 
-            return endereco;
+            return null;
         }
     }
 }

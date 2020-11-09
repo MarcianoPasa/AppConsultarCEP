@@ -1,6 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace AppConsultarCEP
 {
@@ -9,8 +7,8 @@ namespace AppConsultarCEP
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            MainPage = new AppConsultarCEP.View.BuscarCEP();
+            //MainPage = new MainPage();
         }
 
         protected override void OnStart()

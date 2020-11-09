@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppConsultarCEP.View.BuscarCEP"
+             BackgroundColor="#FFFF4D">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="10">
+                <Image 
+                    Source="logo.png" 
+                    Margin="0,0,0,10"
+                    x:Name="logoPrincipal"
+                />
+
+                <Entry
+                    Text="{Binding cepParaBusca}"
+                    x:Name="CEP"                    
+                    Placeholder="Digite o CEP" 
+                    MaxLength="9"
+                    Margin="0,0,0,10"                    
+                    PlaceholderColor="#FFBF00" 
+                    BackgroundColor="#FFFFFF" 
+                    TextColor="#00416B"
+                />
+
+                <Button 
+                    Command="{Binding BuscarCommand}"
+                    Text="Buscar CEP"                 
+                    x:Name="btnBuscarCEP"
+                    Margin="0,0,0,10"
+                    TextColor="#FFFFFF" 
+                    BackgroundColor="#00416B" 
+                />
+
+                <Label
+                    Text="{Binding Mensagem}" 
+                    IsVisible="{Binding ExibirMensagem}" 
+                    TextColor="Black"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    FontSize="20"                       
+                    HorizontalOptions="FillAndExpand"
+                />
+
+                <Label 
+                    Text="{Binding Cep}" 
+                    x:Name="lblCep"
+                    IsVisible="{Binding ExibirCampos}"                     
+                    Style="{StaticResource LabelStyle}"
+                />
+
+                <Label 
+                    Text="{Binding Logradouro}" 
+                    x:Name="lblLogradouro"
+                    IsVisible="{Binding ExibirCampos}"  
+                    Style="{StaticResource LabelStyle}"
+                />
+
+                <Label 
+                    Text="{Binding Complemento}"
+                    x:Name="lblComplemento"
+                    IsVisible="{Binding ExibirCampos}"  
+                    Style="{StaticResource LabelStyle}"
+                />
+
+                <Label 
+                    Text="{Binding Bairro}" 
+                    x:Name="lblBairro"
+                    IsVisible="{Binding ExibirCampos}"  
+                    Style="{StaticResource LabelStyle}"
+                />
+
+                <Label 
+                    Text="{Binding Localidade}" 
+                    x:Name="lblLocalidade"
+                    IsVisible="{Binding ExibirCampos}"  
+                    Style="{StaticResource LabelStyle}"
+                />
+
+                <Label 
+                    Text="{Binding Uf}" 
+                    x:Name="lblUf"
+                    IsVisible="{Binding ExibirCampos}"  
+                    Style="{StaticResource LabelStyle}"
+                />
+
+                <Label 
+                    Text="{Binding Ibge}" 
+                    x:Name="lblIbge"
+                    IsVisible="{Binding ExibirCampos}"  
+                    Style="{StaticResource LabelStyle}"
+                />
+
+                <Label 
+                    Text="{Binding Gia}" 
+                    x:Name="lblGia"
+                    IsVisible="{Binding ExibirCampos}"  
+                    Style="{StaticResource LabelStyle}"
+                />
+
+                <Label 
+                    Text="{Binding Ddd}" 
+                    x:Name="lblDdd"
+                    IsVisible="{Binding ExibirCampos}"  
+                    Style="{StaticResource LabelStyle}"
+                />
+
+                <Label 
+                    Text="{Binding Siafi}" 
+                    x:Name="lblSiafi"  
+                    IsVisible="{Binding ExibirCampos}"  
+                    Style="{StaticResource LabelStyle}"
+                />
+            </StackLayout>
+
+            <StackLayout BackgroundColor="#FFFF4D" 
+                         AbsoluteLayout.LayoutFlags="All" 
+                         AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                         IsVisible="{Binding Carregando}" 
+                         x:Name="slCarregando">
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <ActivityIndicator IsRunning="True" Color="#00416B" />
+                    <Label 
+                        TextColor="#00416B" 
+                        Text="Buscando endereço..." 
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center"
+                        FontSize="20"                       
+                        HorizontalOptions="FillAndExpand"
+                    />
+                </StackLayout>
+            </StackLayout>
+            
+            <StackLayout  BackgroundColor="Red" 
+                          AbsoluteLayout.LayoutFlags="All" 
+                          AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                          IsVisible="{Binding MensagemErro}" 
+                          Padding="10"
+                          VerticalOptions="CenterAndExpand" 
+                          HorizontalOptions="CenterAndExpand">
+                <Label Text="Falha na tentativa de buscar o CEP" TextColor="#FFFFFF" HorizontalOptions="CenterAndExpand" />
+                <Label Text="Tente novamente" TextColor="#FFFFFF" HorizontalOptions="CenterAndExpand" />
+                <Label Text="Caso o erro persistir tente mais tarde" TextColor="#FFFFFF" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
